@@ -13,9 +13,9 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<TextWebSocketF
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if (msg instanceof HttpRequest && msg instanceof HttpContent) {
-            HttpContent httpContent =(HttpContent)msg;
+            HttpRequest httpContent =(HttpRequest)msg;
 
-          System.out.println(httpContent.toString());
+          System.out.println(httpContent.toString()+"   "+  httpContent.uri());
 
             ctx.flush();
 
@@ -23,9 +23,11 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<TextWebSocketF
     }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, TextWebSocketFrame textWebSocketFrame) throws Exception {
+    protected void messageReceived(ChannelHandlerContext channelHandlerContext, TextWebSocketFrame textWebSocketFrame) throws Exception {
 
     }
+
+
 
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
